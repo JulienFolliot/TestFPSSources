@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interfaces/IHealth.h"
 #include "TrucQuiCasse.generated.h"
 
 UCLASS()
-class TESTFPS_API ATrucQuiCasse : public AActor
+class TESTFPS_API ATrucQuiCasse : public AActor, public IHealth
 {
 	GENERATED_BODY()
 
@@ -18,17 +19,18 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* VisualMesh;
 
+	virtual void ApplyDamage(int damageValue, AActor* causer) override;
+	virtual bool IsDead() override;
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	/** called when projectile hits something */
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+private:	
+	bool isDead = false;
 
 };

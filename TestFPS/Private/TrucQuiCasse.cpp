@@ -14,8 +14,6 @@ ATrucQuiCasse::ATrucQuiCasse()
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube"));
 
-	VisualMesh->OnComponentHit.AddDynamic(this, &ATrucQuiCasse::OnHit);
-
 	// Log message in the editor console
 	UE_LOG(LogTemp, Warning, TEXT("Hey ! ***************************************"));
 
@@ -40,10 +38,17 @@ void ATrucQuiCasse::Tick(float DeltaTime)
 
 }
 
-void ATrucQuiCasse::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void ATrucQuiCasse::ApplyDamage(int damageValue, AActor* causer)
 {
-	// Log message in the editor console
-	UE_LOG(LogTemp, Warning, TEXT("Cube was hit by a projectile!"));
+	isDead = true;
 
+	UE_LOG(LogTemp, Warning, TEXT("AAAAAhhhhh"));
+
+	Destroy();
+}
+
+bool ATrucQuiCasse::IsDead()
+{
+	return isDead;
 }
 

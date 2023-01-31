@@ -40,6 +40,12 @@ void ATestFPSProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
+		IHealth* health = Cast<IHealth>(OtherActor);
+
+		if (health && !health->IsDead()) {
+			health->ApplyDamage(1, Owner);
+		}
+
 		// OtherActor->NotifyHit(HitComp, OtherActor, OtherComp, false, GetActorLocation(), NormalImpulse, NormalImpulse, Hit);
 
 		// Log message in the editor console
