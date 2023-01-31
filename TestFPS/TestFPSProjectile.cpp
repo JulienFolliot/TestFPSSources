@@ -46,8 +46,6 @@ void ATestFPSProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 			health->ApplyDamage(1, Owner);
 		}
 
-		// OtherActor->NotifyHit(HitComp, OtherActor, OtherComp, false, GetActorLocation(), NormalImpulse, NormalImpulse, Hit);
-
 		// Log message in the editor console
 		UE_LOG(LogTemp, Warning, TEXT("Projectile hiting an object!"));
 

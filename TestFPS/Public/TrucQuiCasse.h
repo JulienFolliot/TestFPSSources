@@ -4,7 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/PlayerStart.h"
 #include "Interfaces/IHealth.h"
+#include "Engine/World.h"
+#include "Engine/EngineTypes.h"
+#include "GameFramework/Controller.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Engine/Engine.h"
+#include "EngineUtils.h"
+#include "GameFramework/Character.h"
 #include "TrucQuiCasse.generated.h"
 
 UCLASS()

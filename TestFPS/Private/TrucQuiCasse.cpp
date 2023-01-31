@@ -43,8 +43,6 @@ void ATrucQuiCasse::ApplyDamage(int damageValue, AActor* causer)
 	isDead = true;
 
 	UE_LOG(LogTemp, Warning, TEXT("AAAAAhhhhh"));
-
-	Destroy();
 }
 
 bool ATrucQuiCasse::IsDead()
