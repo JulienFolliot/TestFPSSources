@@ -4,6 +4,8 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include "Public/TrucQuiCasse.h"
+#include "TestFPSCharacter.h"
+
 
 ATestFPSProjectile::ATestFPSProjectile() 
 {
@@ -42,12 +44,25 @@ void ATestFPSProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 
 		IHealth* health = Cast<IHealth>(OtherActor);
 
-		if (health && !health->IsDead()) {
-			health->ApplyDamage(1, Owner);
+
+		// Si c'est un truc qui casse alors on frag le player
+		if (health) {
+			if (!health->IsDead()) {
+				health->ApplyDamage(1, Owner);
+			}
+
+			ATestFPSCharacter* player = Cast<ATestFPSCharacter>(Owner);
+
+			if (player) {
+				player->Frag();
+			}
+
 		}
 
+
+
 		// Log message in the editor console
-		UE_LOG(LogTemp, Warning, TEXT("Projectile hiting an object!"));
+		UE_LOG(LogTemp, Warning, TEXT("OWNER = %s"), *Owner->GetClass()->GetName());
 
 		Destroy();
 	}

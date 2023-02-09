@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "Public/Stats/CharacterStats.h"
 #include "TestFPSCharacter.generated.h"
 
 class UInputComponent;
@@ -42,6 +43,11 @@ class ATestFPSCharacter : public ACharacter
 	
 public:
 	ATestFPSCharacter();
+
+	UPROPERTY(Instanced, EditAnywhere, Category = "Stats")
+	UCharacterStats* Stats;
+
+	void Frag();
 
 protected:
 	virtual void BeginPlay();

@@ -21,5 +21,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "BaseStats")
 	TMap<FString, int> BaseStats;
 
-	void setStatValue(FString name, int value);
+	void SetStatValue(FString name, int value);
+
+	int GetStatValue(FString name);
 };

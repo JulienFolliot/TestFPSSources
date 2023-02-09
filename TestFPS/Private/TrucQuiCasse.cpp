@@ -45,8 +45,6 @@ void ATrucQuiCasse::ApplyDamage(int damageValue, AActor* causer)
 
 	UE_LOG(LogTemp, Warning, TEXT("AAAAAhhhhh"));
 
-	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
-
 }
 
 bool ATrucQuiCasse::IsDead()

@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -34,6 +35,26 @@ ATestFPSCharacter::ATestFPSCharacter()
 	Mesh1P->CastShadow = false;
 	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
+
+}
+
+void ATestFPSCharacter::Frag()
+{
+
+	UE_LOG(LogTemp, Warning, TEXT("FRAAAAAAAG"));
+
+	if (Stats) {
+
+		Stats->SetStatValue("POINTS", Stats->GetStatValue("POINTS") + 1);
+
+		UE_LOG(LogTemp, Warning, TEXT("Points %d"), Stats->GetStatValue("POINTS"));
+
+		// Marche po
+		// EndPlay(EEndPlayReason::Destroyed);
+
+		// Marche mais pas la bonne piste
+		//UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+	}
 
 }
 
