@@ -2,6 +2,7 @@
 
 
 #include "TrucQuiCasse.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ATrucQuiCasse::ATrucQuiCasse()
@@ -43,6 +44,9 @@ void ATrucQuiCasse::ApplyDamage(int damageValue, AActor* causer)
 	isDead = true;
 
 	UE_LOG(LogTemp, Warning, TEXT("AAAAAhhhhh"));
+
+	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+
 }
 
 bool ATrucQuiCasse::IsDead()

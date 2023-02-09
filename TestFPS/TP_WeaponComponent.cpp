@@ -43,20 +43,6 @@ void UTP_WeaponComponent::Fire()
 	
 			// Spawn the projectile at the muzzle
 			World->SpawnActor<ATestFPSProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
-
-			//Get a reference to the Pawn Controller.
-			AController* CortollerRef = Character->GetController();
-
-			//Destroy the Player.   
-			Character->Destroy();
-
-			//Get the World and GameMode in the world to invoke its restart player function.
-
-			if (ATestFPSGameMode* GameMode = Cast<ATestFPSGameMode>(World->GetAuthGameMode()))
-			{
-				GameMode->RestartPlayer(CortollerRef);
-			}
-
 		}
 	}
 	
