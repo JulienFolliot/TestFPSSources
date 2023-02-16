@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "TestFPSGameMode.h"
 #include "TP_WeaponComponent.generated.h"
 
 class ATestFPSCharacter;
@@ -14,6 +15,7 @@ class TESTFPS_API UTP_WeaponComponent : public USkeletalMeshComponent
 	GENERATED_BODY()
 
 public:
+
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
 	TSubclassOf<class ATestFPSProjectile> ProjectileClass;
@@ -53,6 +55,8 @@ protected:
 	/** Ends gameplay for this component. */
 	UFUNCTION()
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	virtual void BeginPlay() override;
 
 private:
 	/** The Character holding this weapon*/

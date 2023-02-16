@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "TestFPSGameMode.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -48,6 +49,8 @@ void ATestFPSCharacter::Frag()
 		Stats->SetStatValue("POINTS", Stats->GetStatValue("POINTS") + 1);
 
 		UE_LOG(LogTemp, Warning, TEXT("Points %d"), Stats->GetStatValue("POINTS"));
+
+		this->CallRestartPlayer();
 
 		// Marche po
 		// EndPlay(EEndPlayReason::Destroyed);
@@ -128,4 +131,39 @@ void ATestFPSCharacter::SetHasRifle(bool bNewHasRifle)
 bool ATestFPSCharacter::GetHasRifle()
 {
 	return bHasRifle;
+}
+
+void ATestFPSCharacter::Destroyed()
+{
+	Super::Destroyed();
+
+	// Example to bind to OnPlayerDied event in GameMode. 
+	if (UWorld* World = GetWorld())
+	{
+		if (ATestFPSGameMode* GameMode = Cast<ATestFPSGameMode>(World->GetAuthGameMode()))
+		{
+			GameMode->GetOnPlayerDied().Broadcast(this);
+		}
+	}
+}
+
+void ATestFPSCharacter::CallRestartPlayer()
+{
+	//Get a reference to the Pawn Controller.
+	AController* CortollerRef = GetController();
+
+	//Destroy the Player.   
+	Destroy();
+
+		//Get the World and GameMode in the world to invoke its restart player function.
+		if (UWorld* World = GetWorld())
+		{
+			if (ATestFPSGameMode* GameMode = Cast<ATestFPSGameMode>(World->GetAuthGameMode()))
+			{
+				GameMode->RestartPlayer(CortollerRef);
+				if (GetHasRifle()) {
+					UE_LOG(LogTemp, Warning, TEXT("HAS RIFLE"));
+				}
+			}
+		}
 }

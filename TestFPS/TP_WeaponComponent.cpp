@@ -21,6 +21,9 @@ UTP_WeaponComponent::UTP_WeaponComponent()
 
 void UTP_WeaponComponent::Fire()
 {
+
+	UE_LOG(LogTemp, Warning, TEXT("FIIIIIIRE"));
+
 	if (Character == nullptr || Character->GetController() == nullptr)
 	{
 		return;
@@ -115,3 +118,4 @@ void UTP_WeaponComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		}
 	}
 }
+
